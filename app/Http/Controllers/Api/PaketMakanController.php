@@ -28,6 +28,7 @@ class PaketMakanController extends Controller
         ], 400);
     }
 
+
     public function show($id)
     {
         $paketMakan = PaketMakan::find($id);
@@ -49,7 +50,7 @@ class PaketMakanController extends Controller
     {
         $storeData = $request->all();
         $validate = Validator::make($storeData, [
-            'namaPaket' => 'required|unique:PaketMakans',
+            'namaPaket' => 'required|unique:paket_makans',
             'hargaPaket' => 'required|numeric'
         ]);
 
@@ -59,7 +60,7 @@ class PaketMakanController extends Controller
         $paketMakan = PaketMakan::create($storeData);
         return response([
             'message' => 'Add Paket Makan Success',
-            'data' => $pesanan
+            'data' => $paketMakan
         ], 200); 
     }
 
@@ -99,7 +100,7 @@ class PaketMakanController extends Controller
 
         $updateData = $request->all();
         $validate = Validator::make($updateData, [
-            'namaPaket' => ['required', Rule::unique('PaketMakans')->ignore($paketMakan)],
+            'namaPaket' => ['required', Rule::unique('paket_makans')->ignore($paketMakan)],
             'hargaPaket' => 'required|numeric'
         ]);
 
@@ -107,10 +108,10 @@ class PaketMakanController extends Controller
             return response(['message' => validate->errors()], 400);
         
         $paketMakan->namaPaket = $updateData['namaPaket'];
-        $paketMakan->hargaPkaet = $updateData['hargaPaket'];
+        $paketMakan->hargaPaket = $updateData['hargaPaket'];
 
         if($paketMakan->save()) {
-            return respons([
+            return response([
                 'message' => 'Update Paket Makan Success',
                 'data' => $paketMakan
             ], 200);

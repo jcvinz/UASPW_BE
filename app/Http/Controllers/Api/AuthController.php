@@ -180,11 +180,9 @@ class AuthController extends Controller
 
         $updateData = $request->all(); // mengambil semua input dari api client
         $validate = Validator::make($updateData, [
-            'nama' => 'required|max:60',
+            'name' => 'required|max:60',
             'no_telp' => 'required|regex:/(08)[0-9]/|max:13',
             'alamat' => 'required',
-            'email' => ['email:rfc,dns', 'required', Rule::unique('users')->ignore($user)],
-            'password' => 'required'
         ]); // membuat rule validasi input
 
         if($validate->fails())
@@ -193,8 +191,6 @@ class AuthController extends Controller
         $user->name = $updateData['name']; // edit name
         $user->no_telp = $updateData['no_telp'];
         $user->alamat = $updateData['alamat'];
-        $user->email = $updateData['email']; // edit email
-        $user->password = bcrypt($updateData['password']);
 
         if ($user->save()) {
             return response([

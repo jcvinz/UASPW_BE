@@ -11,7 +11,7 @@ class Pesanan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'no_telp', 'alamat', 'paket', 'harga', 'promo',  'status'
+        'nama', 'no_telp', 'alamat', 'paket', 'harga', 'promo',  'status', 'totalHarga'
     ];
 
     public function getCreatedAtAttribute() {

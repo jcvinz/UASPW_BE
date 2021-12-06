@@ -22,6 +22,7 @@ class CreatePesanansTable extends Migration
             $table->double('harga');
             $table->string('promo');
             $table->integer('status');
+            $table->double('totalHarga');
             $table->timestamps();
         });
     }

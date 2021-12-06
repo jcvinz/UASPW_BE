@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('pesanan', 'Api\PesananController@index');
     Route::get('pesanan/{id}', 'Api\PesananController@show');
     Route::post('pesanan', 'Api\PesananController@store');
-    Route::put('pesanan/{id}', 'Api\PesananController@update_status');
+    Route::put('pesanan/status/{id}', 'Api\PesananController@update_status');
     Route::delete('pesanan/{id}', 'Api\PesananController@destroy');
 
     Route::get('user', 'Api\AuthController@index');

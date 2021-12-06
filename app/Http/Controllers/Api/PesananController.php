@@ -103,13 +103,14 @@ class PesananController extends Controller
 
         $updateData = $request->all();
         $validate = Validator::make($updateData, [
-            'nama' => 'required|max:60',
-            'no_telp' => 'required|regex:/(08)[0-9]/|max:13',
-            'alamat' => 'required',
-            'paket' => 'required',
-            'harga' => 'required|numeric',
-            'promo' => 'nullable',
+            // 'nama' => 'required|max:60',
+            // 'no_telp' => 'required|regex:/(08)[0-9]/|max:13',
+            // 'alamat' => 'required',
+            // 'paket' => 'required',
+            // 'harga' => 'required|numeric',
+            // 'promo' => 'nullable',
             'status' => 'required|numeric'
+            // 'totalHarga' => 'required|numeric'
         ]);
 
         if($validate->fails())
@@ -120,7 +121,7 @@ class PesananController extends Controller
         if($pesanan->save()){
             return response([
                 'message' => 'Update Status Pesanan Success',
-                'data' => $course
+                'data' => $pesanan
             ], 200);
 
         }

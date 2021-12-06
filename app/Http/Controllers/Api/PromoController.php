@@ -29,7 +29,7 @@ class PromoController extends Controller
     }
 
     public function show($id) {
-        $promo = User::find($id); // mencari data user berdasarkan id
+        $promo = Promo::find($id); // mencari data user berdasarkan id
 
         if(!is_null($promo)) {
             return response([
@@ -44,11 +44,11 @@ class PromoController extends Controller
         ], 404); // return message saat data user tidak ditemukan
     }
 
-    public function store($id) {
+    public function store(Request $request) {
         $storeData = $request->all();
         $validate = Validator::make($storeData, [
-            'namaPromo' => 'required',
-            'totalDiskon' => 'required|numeric'
+            'namaPromo' => 'required|unique:promos',
+            'totalDiskon' => 'required|numeric|between:0,99.99'
         ]);
 
         if($validate->fails())
@@ -108,7 +108,7 @@ class PromoController extends Controller
         $promo->totalDiskon = $updateData['totalDiskon'];
 
         if($promo->save()) {
-            return reponse([
+            return response([
                 'message' => 'Update Promo Success',
                 'data' => $promo
             ], 200);
